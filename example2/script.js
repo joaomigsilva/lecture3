@@ -5,7 +5,7 @@ import rhino3dm from 'https://cdn.jsdelivr.net/npm/rhino3dm@0.15.0-beta/rhino3dm
 import { RhinoCompute } from 'https://cdn.jsdelivr.net/npm/compute-rhino3d@0.13.0-beta/compute.rhino3d.module.js'
 
 // reference the definition
-const definitionName = 'rnd_node.gh'
+const definitionName = 'rectangle.gh'
 
 // listen for slider change events
 const count_slider = document.getElementById( 'count' )
@@ -53,9 +53,9 @@ async function compute() {
     let radius = document.getElementById('radius').valueAsNumber
 
     // format data
-    let param1 = new RhinoCompute.Grasshopper.DataTree('RH_IN:radius')
+    let param1 = new RhinoCompute.Grasshopper.DataTree('RH_IN:side1')
     param1.append([0], [radius])
-    let param2 = new RhinoCompute.Grasshopper.DataTree('RH_IN:count')
+    let param2 = new RhinoCompute.Grasshopper.DataTree('RH_IN:side2')
     param2.append([0], [count])
 
     // Add all params to an array
