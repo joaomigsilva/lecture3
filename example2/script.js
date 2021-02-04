@@ -8,10 +8,12 @@ import { RhinoCompute } from 'https://cdn.jsdelivr.net/npm/compute-rhino3d@0.13.
 const definitionName = 'rectangle.gh'
 
 // listen for slider change events
-const count_slider = document.getElementById( 'count' )
+const count_slider = document.getElementById( 'x' )
 count_slider.addEventListener( 'input', onSliderChange, false )
-const radius_slider = document.getElementById( 'radius' )
+const radius_slider = document.getElementById( 'y' )
 radius_slider.addEventListener( 'input', onSliderChange, false )
+const height_slider = document.getElementById( 'z' )
+height_slider.addEventListener( 'input', onSliderChange, false )
 
 const downloadButton = document.getElementById("downloadButton")
 downloadButton.onclick = download
@@ -49,20 +51,23 @@ async function compute() {
     // collect data
 
     // get slider values
-    let count = document.getElementById('count').valueAsNumber
-    let radius = document.getElementById('radius').valueAsNumber
+    let count = document.getElementById('x').valueAsNumber
+    let radius = document.getElementById('y').valueAsNumber
+    let height = document.getElementById('z').valueAsNumber
 
     // format data
-    let param1 = new RhinoCompute.Grasshopper.DataTree('RH_IN:side1')
+    let param1 = new RhinoCompute.Grasshopper.DataTree('RH_IN:x')
     param1.append([0], [radius])
-    let param2 = new RhinoCompute.Grasshopper.DataTree('RH_IN:side2')
+    let param2 = new RhinoCompute.Grasshopper.DataTree('RH_IN:y')
     param2.append([0], [count])
+    let param3 = new RhinoCompute.Grasshopper.DataTree('RH_IN:z')
+    param3.append([0], [height])
 
     // Add all params to an array
     let trees = []
     trees.push(param1)
     trees.push(param2)
-
+    trees.push(param3)
     // Call RhinoCompute
 
     const res = await RhinoCompute.Grasshopper.evaluateDefinition(definition, trees)
@@ -165,13 +170,15 @@ function init() {
     scene = new THREE.Scene()
     scene.background = new THREE.Color(1, 1, 1)
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
-    camera.position.z = - 30
+    camera.position.z = - 10
 
     // create the renderer and add it to the html
     renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setSize(window.innerWidth, window.innerHeight)
     document.body.appendChild(renderer.domElement)
 
+    const material = new THREE.MeshNormalMaterial({ wireframe: true })
+   
     // add some controls to orbit the camera
     const controls = new OrbitControls(camera, renderer.domElement)
 
