@@ -4,8 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon" href="data:;base64,=">
-		<title>S1 - Lecture 3 - Example 2</title>
+		<title>All the tables in the world</title>
 		<style>
+            h1 {text-align: center;}
 			body { 
                 margin: 0;
                 font-family: sans-serif;
@@ -34,18 +35,19 @@
 		</style>
 	</head>
 	<body>
+        <h1>Any table, at your fingertips!</h1>
         <div id="loader"></div>
         <div>
             <input type="range" id="x" name="x" min="0" max="5" value="3" step="0.1">
-            <label for="count">largura</label>
+            <label for="count">Width</label>
         </div>
         <div>
             <input type="range" id="y" name="y" min="0" max="5" value="1" step="0.1">
-            <label for="radius">comprimento</label>
+            <label for="radius">Length</label>
         </div>
         <div>
             <input type="range" id="z" name="z" min="0" max="1.2" value="0.9" step="0.1">
-            <label for="count">altura</label>
+            <label for="count">Height</label>
         </div>
         <button id="downloadButton" disabled>Download</button>
         <script type="module" src="./script.js"></script>
